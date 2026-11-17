@@ -1,0 +1,21 @@
+# Code style: Google based, 4 spaces, opening braces on a new line (Allman)
+BasedOnStyle: Google
+IndentWidth: 4
+ColumnLimit: 120
+BreakBeforeBraces: Allman
+AccessModifierOffset: -4
+IndentCaseLabels: true
+NamespaceIndentation: None
+IndentExternBlock: NoIndent
+FixNamespaceComments: true
+DerivePointerAlignment: false
+PointerAlignment: Left
+SpacesBeforeTrailingComments: 2
+AllowShortFunctionsOnASingleLine: InlineOnly
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortLambdasOnASingleLine: All
+AllowShortEnumsOnASingleLine: false
+SortIncludes: Never
+IncludeBlocks: Preserve

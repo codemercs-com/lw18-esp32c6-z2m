@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" width="1000" height="640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <!-- SPDX-FileCopyrightText: 2026 Code Mercenaries Hard- und Software GmbH -->
+  <!-- SPDX-License-Identifier: MIT -->
+  <title>Wiring: XIAO ESP32-C6 + LED-Warrior18</title>
+  <defs>
+    <g id="gnd">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#333" stroke-width="2"/>
+      <line x1="-10" y1="10" x2="10" y2="10" stroke="#333" stroke-width="2"/>
+      <line x1="-6" y1="14" x2="6" y2="14" stroke="#333" stroke-width="2"/>
+      <line x1="-2" y1="18" x2="2" y2="18" stroke="#333" stroke-width="2"/>
+    </g>
+  </defs>
+
+  <rect width="1000" height="640" fill="#ffffff"/>
+
+  <!-- ===== Leitungen (unter den Blöcken) ===== -->
+  <g fill="none" stroke-width="3" stroke-linejoin="round">
+    <!-- LED-Versorgung zu Step-down und LW18 Vled -->
+    <polyline points="90,110 90,200" stroke="#d62728"/>
+    <polyline points="240,70 920,70 920,190" stroke="#d62728"/>
+    <!-- 5 V: Step-down -> XIAO 5V, Pegelwandler HV, LW18 +5V -->
+    <polyline points="240,235 300,235" stroke="#ff7f0e"/>
+    <polyline points="270,235 270,150 730,150 730,230" stroke="#ff7f0e"/>
+    <polyline points="700,230 760,230" stroke="#ff7f0e"/>
+    <!-- 3,3 V: XIAO -> Pegelwandler LV -->
+    <polyline points="500,230 560,230" stroke="#9467bd" stroke-dasharray="6 4"/>
+    <!-- I2C 3,3 V-Seite -->
+    <polyline points="500,270 560,270" stroke="#1f77b4"/>
+    <polyline points="500,300 560,300" stroke="#2ca02c"/>
+    <!-- I2C 5 V-Seite -->
+    <polyline points="700,270 760,270" stroke="#1f77b4"/>
+    <polyline points="700,300 760,300" stroke="#2ca02c"/>
+    <!-- Logik-Masse -->
+    <polyline points="500,340 560,340" stroke="#333"/>
+    <polyline points="700,340 760,340" stroke="#333"/>
+    <polyline points="960,340 975,340" stroke="#333"/>
+    <!-- Taster -->
+    <polyline points="335,430 335,490" stroke="#555"/>
+    <polyline points="375,430 375,490" stroke="#555"/>
+    <polyline points="425,430 425,490" stroke="#555"/>
+    <polyline points="465,430 465,490" stroke="#555"/>
+    <!-- LED-Strips: Anode (+) und geschaltete Kathode (-) -->
+    <polyline points="785,380 785,480" stroke="#d62728"/>
+    <polyline points="830,380 830,480" stroke="#8c564b" stroke-dasharray="7 4"/>
+    <polyline points="890,380 890,480" stroke="#d62728"/>
+    <polyline points="935,380 935,480" stroke="#8c564b" stroke-dasharray="7 4"/>
+  </g>
+  <!-- Verbindungspunkte -->
+  <circle cx="270" cy="235" r="5" fill="#ff7f0e"/>
+  <circle cx="730" cy="230" r="5" fill="#ff7f0e"/>
+
+  <!-- Leitungsbeschriftungen -->
+  <g font-size="13" fill="#333">
+    <text x="580" y="62">LED supply (+)</text>
+    <text x="96" y="160">Vin</text>
+    <text x="440" y="142">+5 V</text>
+    <text x="508" y="222">3V3 *</text>
+    <text x="508" y="264">SDA</text>
+    <text x="508" y="294">SCL</text>
+    <text x="712" y="264">SDA</text>
+    <text x="712" y="294">SCL</text>
+  </g>
+
+  <!-- ===== Blöcke ===== -->
+  <g stroke="#333" stroke-width="2">
+    <rect x="40" y="30" width="200" height="80" rx="8" fill="#fde2e2"/>
+    <rect x="40" y="200" width="200" height="70" rx="8" fill="#ffe9d1"/>
+    <rect x="300" y="190" width="200" height="240" rx="8" fill="#e3ecfb"/>
+    <rect x="560" y="200" width="140" height="160" rx="8" fill="#ece4f7"/>
+    <rect x="760" y="190" width="200" height="190" rx="8" fill="#e2f3e4"/>
+    <rect x="300" y="490" width="200" height="60" rx="8" fill="#eeeeee"/>
+    <rect x="760" y="480" width="95" height="70" rx="8" fill="#fff6cc"/>
+    <rect x="865" y="480" width="95" height="70" rx="8" fill="#fff6cc"/>
+  </g>
+
+  <!-- Blocktitel und Pins -->
+  <g fill="#111">
+    <text x="140" y="62" font-size="16" font-weight="bold" text-anchor="middle">LED power supply</text>
+    <text x="140" y="84" font-size="13" text-anchor="middle">voltage per LED strip</text>
+    <text x="140" y="101" font-size="13" text-anchor="middle">(LW18: max. 40 V)</text>
+
+    <text x="140" y="232" font-size="16" font-weight="bold" text-anchor="middle">Step-down</text>
+    <text x="140" y="252" font-size="13" text-anchor="middle">LED supply → 5 V</text>
+
+    <text x="400" y="216" font-size="16" font-weight="bold" text-anchor="middle">XIAO ESP32-C6</text>
+    <g font-size="13">
+      <text x="308" y="239">5V</text>
+      <text x="492" y="234" text-anchor="end">3V3</text>
+      <text x="492" y="274" text-anchor="end">D4</text>
+      <text x="492" y="304" text-anchor="end">D5</text>
+      <text x="492" y="344" text-anchor="end">GND</text>
+      <text x="335" y="420" text-anchor="middle">D0</text>
+      <text x="375" y="420" text-anchor="middle">D1</text>
+      <text x="425" y="420" text-anchor="middle">D2</text>
+      <text x="465" y="420" text-anchor="middle">D3</text>
+    </g>
+
+    <text x="630" y="190" font-size="15" font-weight="bold" text-anchor="middle">Level shifter</text>
+    <g font-size="13">
+      <text x="568" y="234">LV</text>
+      <text x="568" y="274">LV1</text>
+      <text x="568" y="304">LV2</text>
+      <text x="568" y="344">GND</text>
+      <text x="692" y="234" text-anchor="end">HV</text>
+      <text x="692" y="274" text-anchor="end">HV1</text>
+      <text x="692" y="304" text-anchor="end">HV2</text>
+      <text x="692" y="344" text-anchor="end">GND</text>
+      <text x="630" y="252" text-anchor="middle" font-size="11" fill="#555">3.3 V ⇄ 5 V</text>
+    </g>
+
+    <text x="860" y="216" font-size="16" font-weight="bold" text-anchor="middle">LED-Warrior18</text>
+    <text x="860" y="234" font-size="12" text-anchor="middle" fill="#555">LW18-01MOD</text>
+    <g font-size="13">
+      <text x="768" y="234">+5V</text>
+      <text x="768" y="274">SDA</text>
+      <text x="768" y="304">SCL</text>
+      <text x="768" y="344">GND</text>
+      <text x="912" y="182" text-anchor="end">Vled</text>
+      <text x="785" y="372" text-anchor="middle" font-size="11">LED1+</text>
+      <text x="830" y="372" text-anchor="middle" font-size="11">LED1-</text>
+      <text x="890" y="372" text-anchor="middle" font-size="11">LED2+</text>
+      <text x="935" y="372" text-anchor="middle" font-size="11">LED2-</text>
+      <text x="952" y="344" text-anchor="end">Gnd</text>
+    </g>
+
+    <text x="400" y="516" font-size="15" font-weight="bold" text-anchor="middle">Buttons 1–4</text>
+    <text x="400" y="536" font-size="13" text-anchor="middle">push buttons to GND</text>
+
+    <text x="807" y="509" font-size="14" font-weight="bold" text-anchor="middle">LED strip</text>
+    <text x="807" y="527" font-size="13" text-anchor="middle">channel 1</text>
+    <text x="807" y="543" font-size="11" text-anchor="middle">max. 4 A</text>
+    <text x="912" y="509" font-size="14" font-weight="bold" text-anchor="middle">LED strip</text>
+    <text x="912" y="527" font-size="13" text-anchor="middle">channel 2</text>
+    <text x="912" y="543" font-size="11" text-anchor="middle">max. 4 A</text>
+  </g>
+
+  <!-- Masse-Symbole: alle GND sind verbunden -->
+  <use href="#gnd" x="200" y="110"/>
+  <use href="#gnd" x="200" y="270"/>
+  <use href="#gnd" x="630" y="360"/>
+  <use href="#gnd" x="975" y="340"/>
+  <use href="#gnd" x="480" y="550"/>
+  <g font-size="12" fill="#333">
+    <text x="214" y="126">GND</text>
+    <text x="214" y="286">GND</text>
+    <text x="644" y="376">GND</text>
+  </g>
+
+  <!-- Legende -->
+  <g font-size="13" fill="#111">
+    <rect x="40" y="330" width="220" height="200" rx="8" fill="#fafafa" stroke="#bbb"/>
+    <text x="54" y="354" font-weight="bold">Legend</text>
+    <line x1="54" y1="374" x2="84" y2="374" stroke="#d62728" stroke-width="3"/><text x="94" y="378">LED supply (+)</text>
+    <line x1="54" y1="396" x2="84" y2="396" stroke="#8c564b" stroke-width="3" stroke-dasharray="7 4"/><text x="94" y="400">LED cathode (PWM)</text>
+    <line x1="54" y1="418" x2="84" y2="418" stroke="#ff7f0e" stroke-width="3"/><text x="94" y="422">+5 V</text>
+    <line x1="54" y1="440" x2="84" y2="440" stroke="#9467bd" stroke-width="3" stroke-dasharray="6 4"/><text x="94" y="444">+3.3 V *</text>
+    <line x1="54" y1="462" x2="84" y2="462" stroke="#1f77b4" stroke-width="3"/><text x="94" y="466">I2C SDA</text>
+    <line x1="54" y1="484" x2="84" y2="484" stroke="#2ca02c" stroke-width="3"/><text x="94" y="488">I2C SCL</text>
+    <use href="#gnd" x="69" y="500"/><text x="94" y="514">GND (all connected)</text>
+  </g>
+
+  <text x="500" y="598" font-size="13" fill="#555" text-anchor="middle">The ESP32-C6 GPIOs are not 5 V tolerant: connect SDA/SCL only via the level shifter.</text>
+  <text x="500" y="620" font-size="13" fill="#555" text-anchor="middle">* Level shifter supply depends on the module: some generate LV from HV, then do NOT connect 3V3. See its datasheet.</text>
+</svg>

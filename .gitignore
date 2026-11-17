@@ -1,0 +1,18 @@
+# PlatformIO: build output and downloaded packages (no binaries in the repository)
+.pio
+.cache
+.dummy
+compile_commands.json
+*.bin
+*.elf
+
+# VS Code: local settings with paths (extensions.json stays as a recommendation)
+.vscode/*
+!.vscode/extensions.json
+
+# Internal project files, not published
+.claude/
+PROJEKT.md
+sample_readme.md
+docs/LW18_Datasheet.md
+.gitignore.optional
